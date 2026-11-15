@@ -12,6 +12,7 @@
     "format": "prettier --write ."
   },
   "overrides": {
+    "dompurify": "3.4.18",
     "rolldown": "1.2.1"
   },
   "dependencies": {
