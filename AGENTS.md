@@ -12,3 +12,4 @@
 - Keep reusable product walkthrough videos as CDN-backed asset pointers so the app repository stays lightweight.
 - Use one shared booking ticket component for confirmation and booking history, with client-side PDF export, so both display the same persisted booking details.
 - Apply route-entry motion at the root outlet so every page transitions consistently and respects reduced-motion preferences.
+- Keep the session-only multi-conversation chat state mounted outside the route-keyed outlet, with one shared chat surface for its floating popup and dedicated conversation URLs, so navigation preserves active chat messages without storing them.
