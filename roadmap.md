@@ -10,3 +10,4 @@
 - [ ] Aurora admin dashboard: revenue, bookings by city, Google Maps of active vehicles
 - [ ] Real availability calendar + real price quote on vehicle detail and booking flow
 - [x] Homepage booking tutorial video, Scooty type, uploaded booking photo, and scroll-reactive background
+- [ ] Floating DriveEasy AI chat with session-only multi-conversation chat, streamed replies, and an animated popup
