@@ -13,6 +13,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { supabase } from "@/integrations/supabase/client";
+import { ChatDock, ChatSessionProvider } from "@/components/DriveEasyChat";
 
 function NotFoundComponent() {
   return (
@@ -147,10 +148,13 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <div key={pathname} className="route-enter">
-        <Outlet />
-      </div>
+      <ChatSessionProvider>
+        {/* Keep the chat mounted outside route transitions so conversations survive navigation. */}
+        <div key={pathname} className="route-enter">
+          <Outlet />
+        </div>
+        <ChatDock />
+      </ChatSessionProvider>
     </QueryClientProvider>
   );
 }

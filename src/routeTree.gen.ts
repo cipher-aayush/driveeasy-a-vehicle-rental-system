@@ -19,6 +19,8 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as ChatConversationIdRouteImport } from './routes/chat.$conversationId'
 import { Route as VehiclesIndexRouteImport } from './routes/vehicles.index'
 import { Route as VehiclesVehicleIdRouteImport } from './routes/vehicles.$vehicleId'
 import { Route as AuthenticatedBookVehicleIdRouteImport } from './routes/_authenticated/book.$vehicleId'
@@ -72,6 +74,16 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChatConversationIdRoute = ChatConversationIdRouteImport.update({
+  id: '/chat/$conversationId',
+  path: '/chat/$conversationId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const VehiclesIndexRoute = VehiclesIndexRouteImport.update({
   id: '/vehicles/',
   path: '/vehicles/',
@@ -99,6 +111,8 @@ export interface FileRoutesByFullPath {
   '/terms': typeof TermsRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/api/chat': typeof ApiChatRoute
+  '/chat/$conversationId': typeof ChatConversationIdRoute
   '/vehicles/$vehicleId': typeof VehiclesVehicleIdRoute
   '/vehicles/': typeof VehiclesIndexRoute
   '/book/$vehicleId': typeof AuthenticatedBookVehicleIdRoute
@@ -113,6 +127,8 @@ export interface FileRoutesByTo {
   '/terms': typeof TermsRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/api/chat': typeof ApiChatRoute
+  '/chat/$conversationId': typeof ChatConversationIdRoute
   '/vehicles/$vehicleId': typeof VehiclesVehicleIdRoute
   '/vehicles': typeof VehiclesIndexRoute
   '/book/$vehicleId': typeof AuthenticatedBookVehicleIdRoute
@@ -129,6 +145,8 @@ export interface FileRoutesById {
   '/terms': typeof TermsRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/api/chat': typeof ApiChatRoute
+  '/chat/$conversationId': typeof ChatConversationIdRoute
   '/vehicles/$vehicleId': typeof VehiclesVehicleIdRoute
   '/vehicles/': typeof VehiclesIndexRoute
   '/_authenticated/book/$vehicleId': typeof AuthenticatedBookVehicleIdRoute
@@ -145,6 +163,8 @@ export interface FileRouteTypes {
     | '/terms'
     | '/admin'
     | '/dashboard'
+    | '/api/chat'
+    | '/chat/$conversationId'
     | '/vehicles/$vehicleId'
     | '/vehicles/'
     | '/book/$vehicleId'
@@ -159,6 +179,8 @@ export interface FileRouteTypes {
     | '/terms'
     | '/admin'
     | '/dashboard'
+    | '/api/chat'
+    | '/chat/$conversationId'
     | '/vehicles/$vehicleId'
     | '/vehicles'
     | '/book/$vehicleId'
@@ -174,6 +196,8 @@ export interface FileRouteTypes {
     | '/terms'
     | '/_authenticated/admin'
     | '/_authenticated/dashboard'
+    | '/api/chat'
+    | '/chat/$conversationId'
     | '/vehicles/$vehicleId'
     | '/vehicles/'
     | '/_authenticated/book/$vehicleId'
@@ -188,6 +212,8 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   PrivacyRoute: typeof PrivacyRoute
   TermsRoute: typeof TermsRoute
+  ApiChatRoute: typeof ApiChatRoute
+  ChatConversationIdRoute: typeof ChatConversationIdRoute
   VehiclesVehicleIdRoute: typeof VehiclesVehicleIdRoute
   VehiclesIndexRoute: typeof VehiclesIndexRoute
 }
@@ -264,6 +290,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chat/$conversationId': {
+      id: '/chat/$conversationId'
+      path: '/chat/$conversationId'
+      fullPath: '/chat/$conversationId'
+      preLoaderRoute: typeof ChatConversationIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/vehicles/': {
       id: '/vehicles/'
       path: '/vehicles'
@@ -312,6 +352,8 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   PrivacyRoute: PrivacyRoute,
   TermsRoute: TermsRoute,
+  ApiChatRoute: ApiChatRoute,
+  ChatConversationIdRoute: ChatConversationIdRoute,
   VehiclesVehicleIdRoute: VehiclesVehicleIdRoute,
   VehiclesIndexRoute: VehiclesIndexRoute,
 }
