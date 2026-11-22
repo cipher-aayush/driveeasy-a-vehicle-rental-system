@@ -34,20 +34,20 @@ export async function handleChat(request: Request): Promise<Response> {
     }
 
     const payload: unknown = JSON.parse(rawBody);
-    if (!isRecord(payload) || !Array.isArray(payload.messages)) {
+    if (!isRecord(payload) || !Array.isArray(payload["messages"])) {
       return jsonError("The message could not be read. Please try again.", 400);
     }
     if (
-      typeof payload.conversationId !== "string" ||
-      !/^[a-zA-Z0-9_-]{1,80}$/.test(payload.conversationId)
+      typeof payload["conversationId"] !== "string" ||
+      !/^[a-zA-Z0-9_-]{1,80}$/.test(payload["conversationId"])
     ) {
       return jsonError("The conversation could not be identified. Start a new chat.", 400);
     }
-    if (payload.messages.length === 0 || payload.messages.length > MAX_MESSAGES) {
+    if (payload["messages"].length === 0 || payload["messages"].length > MAX_MESSAGES) {
       return jsonError("This conversation is too long. Start a new chat to continue.", 413);
     }
 
-    const validatedMessages = await validateUIMessages<UIMessage>({ messages: payload.messages });
+    const validatedMessages = await validateUIMessages<UIMessage>({ messages: payload["messages"] });
     if (validatedMessages.some((message) => message.role !== "user" && message.role !== "assistant")) {
       return jsonError("This chat message format is not supported.", 400);
     }
